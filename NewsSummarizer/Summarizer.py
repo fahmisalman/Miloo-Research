@@ -5,6 +5,12 @@ __author__ = "Fahmi Salman Nurfikri"
 
 
 def sentence_split(paragraph):
+    """
+    Split the paragraph/documents into sentences.
+
+    :param paragraph: text documents
+    :return: list of sentences
+    """
     j = 0
     data = []
     for i in range(len(paragraph)):
@@ -15,6 +21,12 @@ def sentence_split(paragraph):
 
 
 def word_freq(data):
+    """
+    Count frequency for each words in the documents.
+
+    :param data: text documents
+    :return: frequency for each words
+    """
     w = []
     for sentence in data:
         for words in sentence:
