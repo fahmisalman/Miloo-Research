@@ -1,64 +1,32 @@
-from NewsClustering import LoadData
-from gensim.models import Word2Vec
-from gensim.utils import simple_preprocess
+from NewsClustering import Data_processing, Word2VecModel
+from sklearn.cluster import KMeans
+from collections import Counter
 import os
-
-
-def w2v_model(x, sizes=300, windows=5, epoch=10, save=False, filename='', sg=True):
-    """
-
-    :param x:
-    :param sizes:
-    :param windows:
-    :param epoch:
-    :param save:
-    :param filename:
-    :param sg:
-    :return:
-    """
-
-    type_list = ['CBoW', 'Skip-gram']
-
-    x_prep = []
-    for i, row in enumerate(x):
-        x_prep.append(simple_preprocess(row))
-
-    type = 0
-
-    if sg:
-        type = 1
-
-    model = Word2Vec(
-        x_prep,
-        size=sizes,
-        window=windows,
-        min_count=2,
-        workers=10,
-        sg=type
-    )
-
-    model.train(x_prep, total_examples=len(x_prep), epochs=epoch)
-
-    if save:
-        if filename == '':
-            model.save(os.path.join(os.getcwd(),
-                                    'Model/Word2Vec_model={}_sizes={}_windows{}.model'.format(type_list[type],
-                                                                                        sizes,
-                                                                                        windows)))
-        else:
-            model.save(os.path.join(os.getcwd(), 'Model/' + filename))
-
-    return model
 
 
 if __name__ == '__main__':
 
     # Load data pickle and save to csv
-    data = LoadData.load_data('news_dataset_5000.pkl')
+    data = Data_processing.load_data('news_dataset_5000.pkl')
     x = []
     for row in data:
         x.append(row['news_body'])
-    LoadData.save2csv('News_dataset.csv', [x])
+    Data_processing.save2csv('News_dataset.csv', [x])
 
     # Creating Word2Vec model
-    model = w2v_model(x, save=True)
+    # model = w2v_model(x, save=True)
+    # model = get_w2v_model('Word2Vec_model=Skip-gram_sizes=300_windows5')
+    w2v = Word2VecModel.Word2VecModel()
+    model = w2v.load_w2v_model('Word2Vec_model=Skip-gram_sizes=300_windows5')
+    x_train = []
+    for row in x:
+        x_train.append(w2v.document_to_vector(row))
+    Data_processing.save2csv('Vector_data.csv', x_train)
+
+    # Cluster the data
+    clf = KMeans(n_clusters=5, random_state=1)
+    clf.fit(x_train)
+    for i in clf.labels_:
+        print(i)
+
+    print(Counter(clf.labels_))
