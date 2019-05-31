@@ -62,6 +62,9 @@ class Word2VecModel(object):
         self.model = Word2Vec.load(os.path.join(os.getcwd(), 'Model/' + filename))
         return self.model
 
+    def preprocessing(self, doc):
+        return simple_preprocess(doc)
+
     def document_to_vector(self, doc):
         data = simple_preprocess(doc)
         vector = np.zeros(self.model.vector_size)

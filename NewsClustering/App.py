@@ -1,4 +1,4 @@
-from NewsClustering import Data_processing, Word2VecModel
+from NewsClustering import Data_processing, Word2VecModel, MultidocSummary
 from sklearn.cluster import KMeans
 from collections import Counter
 import os
@@ -26,7 +26,21 @@ if __name__ == '__main__':
     # Cluster the data
     clf = KMeans(n_clusters=5, random_state=1)
     clf.fit(x_train)
-    for i in clf.labels_:
-        print(i)
 
-    print(Counter(clf.labels_))
+    x_words = []
+    for row in x:
+        x_words.append(w2v.preprocessing(row))
+
+    list_label = list(set(clf.labels_))
+
+    for i in range(len(list_label)):
+
+        docs = []
+
+        for j in range(len(clf.labels_)):
+
+            if clf.labels_[j] == list_label[i]:
+                docs.append(x[j])
+
+        print(MultidocSummary.fit(docs))
+
