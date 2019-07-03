@@ -4,6 +4,21 @@ from collections import Counter
 import os
 
 
+def top_n_news(X, y):
+
+    list_label = list(set(y))
+
+    for i in range(len(list_label)):
+        docs = []
+        for j in range(len(y)):
+            if y[j] == list_label[i]:
+                docs.append(X[j])
+
+        print("Cluster-{}".format(list_label[i]))
+        print(MultidocSummary.fit(docs))
+
+
+
 if __name__ == '__main__':
 
     # Load data pickle and save to csv
@@ -27,20 +42,5 @@ if __name__ == '__main__':
     clf = KMeans(n_clusters=5, random_state=1)
     clf.fit(x_train)
 
-    x_words = []
-    for row in x:
-        x_words.append(w2v.preprocessing(row))
-
-    list_label = list(set(clf.labels_))
-
-    for i in range(len(list_label)):
-
-        docs = []
-
-        for j in range(len(clf.labels_)):
-
-            if clf.labels_[j] == list_label[i]:
-                docs.append(x[j])
-
-        print(MultidocSummary.fit(docs))
-
+    # Get the characteristic of each cluster
+    top_n_news(x, clf.labels_)
