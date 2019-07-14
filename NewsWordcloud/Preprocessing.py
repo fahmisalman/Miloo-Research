@@ -1,3 +1,6 @@
+import numpy as np
+from PIL import Image
+
 def stopword_removal(sentence):
     token = sentence.split()
     stopword = [line.rstrip('\n\r') for line in open('stopwords.txt')]
@@ -56,5 +59,4 @@ def join_input(newslist):
     for i in newslist:
         result = " ".join(i)
     return result
-
 
