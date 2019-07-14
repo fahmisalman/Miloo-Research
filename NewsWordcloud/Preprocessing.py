@@ -1,3 +1,6 @@
+import numpy as np
+from PIL import Image
+
 def stopword_removal(sentence):
     token = sentence.split()
     stopword = [line.rstrip('\n\r') for line in open('stopwords.txt')]
@@ -50,3 +53,10 @@ def remove_punctuation(d):
         i += 1
     d = ' '.join(d)
     return d
+
+def join_input(newslist):
+    # result = " ".join(review for review in newslist)
+    for i in newslist:
+        result = " ".join(i)
+    return result
+
