@@ -50,3 +50,11 @@ def remove_punctuation(d):
         i += 1
     d = ' '.join(d)
     return d
+
+def join_input(newslist):
+    # result = " ".join(review for review in newslist)
+    for i in newslist:
+        result = " ".join(i)
+    return result
+
+

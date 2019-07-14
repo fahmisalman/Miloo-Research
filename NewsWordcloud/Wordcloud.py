@@ -1,9 +1,9 @@
 from wordcloud import WordCloud, STOPWORDS
-from scipy.misc import imread
-from NewsWordcloud.Preprocessing import *
+# from scipy.misc import
+from Preprocessing import *
 import matplotlib.pyplot as plt
 import glob
-
+import time
 
 class PyWordCloud(object):
 
@@ -39,6 +39,8 @@ class PyWordCloud(object):
 
 if __name__ == '__main__':
 
+    start_time = time.time()
+
     text = """Kebakaran rumah terjadi permukiman padat penduduk di Kebayoran Baru, Jakarta Selatan. Sebanyak 14 unit mobil pemadam kebakaran dikerahkan ke lokasi.
 
 "Benar ada kebakaran, sudah ada 14 unit ke lokasi termasuk pendukung," kata Petugas Sudin Penanggulangan Kebakaran dan Penyelamatan (PKP) Jakarta Selatan, Sukarno, saat dikonfirmasi, Selasa (2/7/2019).
@@ -54,3 +56,5 @@ Belum diketahui penyebab pasti kebakaran serta dampak kebakaran itu. Sukarno men
     wc = PyWordCloud(text)
     wc.fit()
     wc.view_wordcloud()
+
+    print("--- %s seconds ---" % (time.time() - start_time))
