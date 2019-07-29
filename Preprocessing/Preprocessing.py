@@ -47,3 +47,49 @@ class Preprocessing(object):
         for i in range(len(tokens)):
             tokens[i] = self.stemmer.stem(tokens[i])
         return tokens
+
+    def remove_escape(self, d):
+        d = d.split('\\')
+        d = ' '.join(d)
+        return d
+
+    def remove_url(self, d):
+        d = d.split()
+        i = 0
+        while i < len(d):
+            if 'https://' in d[i]:
+                d.remove(d[i])
+                i -= 1
+            elif 'http://' in d[i]:
+                d.remove(d[i])
+                i -= 1
+            i += 1
+
+        d = ' '.join(d)
+        return d
+
+    def remove_punctuation(self, d):
+        d = d.split()
+        i = 0
+        while i < len(d):
+            if len(d) > 0:
+                if d[i][0] == 'x' and len(d[i]) == 3:
+                    d.remove(d[i])
+                    i -= 1
+            if len(d) > 0:
+                if len(d[i]) == 1:
+                    d.remove(d[i])
+                    i -= 1
+            if len(d) > 0:
+                if 'rt' in d[i]:
+                    d.remove(d[i])
+                    i -= 1
+            i += 1
+        d = ' '.join(d)
+        return d
+
+    def join_input(self, newslist):
+        # result = " ".join(review for review in newslist)
+        for i in newslist:
+            result = " ".join(i)
+        return result

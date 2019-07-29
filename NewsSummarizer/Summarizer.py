@@ -1,4 +1,4 @@
-from NewsSummarizer.Preprocessing import Preprocessing
+from Preprocessing.Preprocessing import Preprocessing
 
 
 __author__ = "Fahmi Salman Nurfikri"

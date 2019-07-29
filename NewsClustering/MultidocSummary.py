@@ -1,4 +1,4 @@
-from NewsSummarizer.Preprocessing import Preprocessing
+from Preprocessing.Preprocessing import Preprocessing
 from NewsSummarizer.Summarizer import word_freq
 
 

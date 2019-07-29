@@ -1,9 +1,10 @@
 from wordcloud import WordCloud, STOPWORDS
 # from scipy.misc import
-from Preprocessing import *
+from NewsWordcloud.Preprocessing import *
 import matplotlib.pyplot as plt
 import glob
 import time
+
 
 class PyWordCloud(object):
 
