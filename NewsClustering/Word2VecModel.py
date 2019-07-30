@@ -11,7 +11,7 @@ class Word2VecModel(object):
         self.x_prep = []
         self.model = None
 
-    def w2v_model(self, x, sizes=300, windows=5, epoch=10, save=False, filename='', sg=True):
+    def fit(self, x, sizes=300, windows=5, epoch=10, save=False, filename='', sg=True):
         """
 
         :param x:
@@ -55,8 +55,6 @@ class Word2VecModel(object):
                                                                                                        windows)))
             else:
                 self.model.save(os.path.join(os.getcwd(), 'Model/' + filename))
-
-        return self.model
 
     def load_w2v_model(self, filename):
         self.model = Word2Vec.load(os.path.join(os.getcwd(), 'Model/' + filename))

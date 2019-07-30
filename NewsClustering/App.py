@@ -18,19 +18,20 @@ def top_n_news(X, y):
         print(MultidocSummary.fit(docs))
 
 
-
-if __name__ == '__main__':
+def fit():
 
     # Load data pickle and save to csv
-    data = Data_processing.load_data('news_dataset_5000.pkl')
+    data = Data_processing.load_data(os.path.join(os.getcwd(), 'news_dataset_5000.pkl'))
     x = []
     for row in data:
         x.append(row['news_body'])
     Data_processing.save2csv('News_dataset.csv', [x])
 
     # Creating Word2Vec model
-    # model = w2v_model(x, save=True)
-    # model = get_w2v_model('Word2Vec_model=Skip-gram_sizes=300_windows5')
+    w2v = Word2VecModel.Word2VecModel()
+    w2v.fit(x, save=True)
+
+    # Load Word2Vec model
     w2v = Word2VecModel.Word2VecModel()
     model = w2v.load_w2v_model('Word2Vec_model=Skip-gram_sizes=300_windows5')
     x_train = []
