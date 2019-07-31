@@ -44,6 +44,12 @@ class Preprocessing(object):
         return temp
 
     def stemming(self, tokens):
+        """
+        Transform words into root words using Nazief-Andriani Stemming algorithm
+
+        :param tokens: list of words
+        :return: list of words that has been transform into root words
+        """
         for i in range(len(tokens)):
             tokens[i] = self.stemmer.stem(tokens[i])
         return tokens
@@ -54,6 +60,12 @@ class Preprocessing(object):
         return d
 
     def remove_url(self, d):
+        """
+        Remove URL in text
+
+        :param d: document
+        :return:
+        """
         d = d.split()
         i = 0
         while i < len(d):
