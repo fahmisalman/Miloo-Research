@@ -15,6 +15,12 @@ class PyWordCloud(object):
         self.background = background
 
     def preprocessing(self, d):
+        """
+        Remove unnecessary characters and words in the dataset
+
+        :param d: text (sentence, documents, news text, etc)
+        :return: text that has been cleaning from unnecessary characters and words
+        """
         pre = Preprocessing.Preprocessing()
         d = d[2:-1].lower()
         d = pre.remove_escape(d)
@@ -48,6 +54,11 @@ class PyWordCloud(object):
     #     return transformed_image_mask
 
     def fit(self, text):
+        """
+        Generate the wordclouds
+
+        :param text: text that will be generated
+        """
 
         self.text = text
         mask_img = None
@@ -72,6 +83,13 @@ class PyWordCloud(object):
         ).generate(words)
 
     def view_wordcloud(self, show=True, save=False, filename=''):
+        """
+        Show or/and save the Wordcloud
+
+        :param show: show the wordclouds if conditions is True
+        :param save: save the wordclouds if conditions is True
+        :param filename: filename of the wordclouds that will be saved
+        """
         plt.imshow(self.wordcloud)
         plt.axis('off')
         if filename == '':
