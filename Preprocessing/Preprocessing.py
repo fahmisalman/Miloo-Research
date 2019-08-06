@@ -8,7 +8,7 @@ class Preprocessing(object):
     def __init__(self):
         self.factory = StemmerFactory()
         self.stemmer = self.factory.create_stemmer()
-        self.stopwords = [line.rstrip('\n\r') for line in open(os.path.join(os.getcwd(), 'stopwords.txt'))]
+        self.stopwords = [line.rstrip('\n\r') for line in open(os.path.join(os.getcwd(), 'Preprocessing/stopwords.txt'))]
 
     def casefolding(self, sentence):
         """
@@ -101,7 +101,5 @@ class Preprocessing(object):
         return d
 
     def join_input(self, newslist):
-        # result = " ".join(review for review in newslist)
-        for i in newslist:
-            result = " ".join(i)
+        result = ''.join(newslist)
         return result

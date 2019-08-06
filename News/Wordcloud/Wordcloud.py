@@ -27,6 +27,9 @@ class PyWordCloud(object):
         d = pre.remove_url(d)
         d = pre.remove_punctuation(d)
         d = pre.stopword_removal(d)
+        print(d)
+        d = pre.join_input(d)
+        print(d)
         return d
 
     # def add_image_mask(self, path):
