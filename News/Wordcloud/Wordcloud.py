@@ -2,6 +2,7 @@ from Preprocessing import Preprocessing
 from wordcloud import WordCloud
 from scipy.misc import imread
 import matplotlib.pyplot as plt
+import os
 
 
 class PyWordCloud(object):
@@ -30,30 +31,6 @@ class PyWordCloud(object):
         d = pre.join_input(d)
         return d
 
-    # def add_image_mask(self, path):
-    #     # generate image
-    #     """
-    #     image should be png with background white and forground black
-    #     :param path: path of image
-    #     :return: image masking
-    #     """
-    #     image_mask = np.array(
-    #         Image.open(path))
-    #
-    #     def transform_format(val):
-    #         if val == 0:
-    #             return 255
-    #         else:
-    #             return val
-    #
-    #     # Transform your mask into a new one that will work with the function:
-    #     transformed_image_mask = np.ndarray((image_mask.shape[0], image_mask.shape[1]), np.int32)
-    #
-    #     for i in range(len(transformed_image_mask)):
-    #         transformed_image_mask[i] = list(map(transform_format, image_mask[i]))
-    #
-    #     return transformed_image_mask
-
     def fit(self, text):
         """
         Generate the wordclouds
@@ -64,9 +41,13 @@ class PyWordCloud(object):
         self.text = text
         mask_img = None
 
+        if self.font is None:
+            self.font = os.path.join(os.getcwd(), 'News/Wordcloud/Assets/Font/CabinSketch-Bold.ttf')
+
         if self.mask is None:
             width = 400
             height = 200
+            mask_img = imread(os.path.join(os.getcwd(), 'News/Wordcloud/Assets/Mask/jap.jpg'), flatten=True)
         else:
             mask_img = imread(self.mask, flatten=True)
             height = mask_img.shape[0]

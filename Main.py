@@ -1,4 +1,5 @@
 from News.Wordcloud import Wordcloud
+from News.Summarizer import Summarizer
 
 
 if __name__ == '__main__':
@@ -14,6 +15,8 @@ if __name__ == '__main__':
     Belum diketahui penyebab pasti kebakaran serta dampak kebakaran itu. Sukarno menyebut petugas sedang melakukan pemadaman api.
 
     "Petugas masih bekerja, situasi masih merah (api menyala, red)," sebutnya."""
+
     wc = Wordcloud.PyWordCloud()
     wc.fit(text)
     wc.view_wordcloud()
+    print(Summarizer.fit(text))
