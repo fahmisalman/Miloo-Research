@@ -1,4 +1,5 @@
 from Preprocessing.Preprocessing import Preprocessing
+import nltk
 
 
 __author__ = "Fahmi Salman Nurfikri"
@@ -11,13 +12,8 @@ def sentence_split(paragraph):
     :param paragraph: text documents
     :return: list of sentences
     """
-    j = 0
-    data = []
-    for i in range(len(paragraph)):
-        if paragraph[i] == '.':
-            data += (list(filter(None, paragraph[j:i].rsplit('\n'))))
-            j = i + 1
-    return data
+
+    return nltk.sent_tokenize(paragraph)
 
 
 def word_freq(data):
